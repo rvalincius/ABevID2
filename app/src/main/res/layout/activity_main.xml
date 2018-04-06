@@ -46,12 +46,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/enterbutton"
         android:layout_width="92dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginTop="16dp"
-        android:inputType="text"
+        android:layout_marginEnd="64dp"
+        android:layout_marginTop="36dp"
         android:text="@string/enter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/upcNumber" />
@@ -62,11 +61,11 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="36dp"
         android:text="@string/scan"
-        app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintEnd_toStartOf="@+id/enterbutton"
+        app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/upcNumber" />
     <TextView
