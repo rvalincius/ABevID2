@@ -1,4 +1,5 @@
 package com.abevid.abevid;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,86 +22,84 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class UPCLookup {
 
-    private URLConnection uNutritionix = null;
-    private String appID,appKey;
-    protected Map<String, Object> values = new HashMap<String,Object>();
-
-    // Default constructor
-    public UPCLookup(){
-
-    }
-
-
-    /**
-     * Constructor to call API method and pass in the required UPC barcode
-     *
-     * @param iUPC Barcode input from scanner
-     * @param sKey Application Key for API
-     * @param sID Application ID for API
-     * @throws IOException IO Exception error
-     * @throws ParseException Data read exception error
-     */
-    public UPCLookup(String iUPC, String sKey, String sID) throws IOException, ParseException {
-        appID=sKey;
-        appKey=sID;
+	private URLConnection uNutritionix = null;
+	private String appID,appKey;
+	protected Map<String, Object> values = new HashMap<String,Object>();
+	
+	// Default constructor
+	public UPCLookup() {
+		
+	}
+	
+	
+	/**
+	 * Constructor to call API method and pass in the required UPC barcode
+	 * 
+	 * @param iUPC Barcode input from scanner
+	 * @throws IOException IO Exception error
+	 * @throws ParseException Data read exception error
+	 */
+	public UPCLookup(String iUPC) throws IOException, ParseException {
+		appID="247a5a79";
+		appKey="89e7a52a56731cf95b5a0fab0d31b89a";
         setMap(iUPC);
+		
+	}
+	
+	
+	/**
+	 * Sets the Map of nutritional values received from the Nutritionix API
+	 * 
+	 * @param input UPC barcode value received from a scanning application
+	 * @throws IOException Thrown exception from Inputstream
+	 * @throws ParseException Thrown exception from parsing the Inputstream
+	 */
+	private void setMap(String input) throws ParseException {
+		
+		ObjectMapper map= new ObjectMapper();
+		JSONParser jsonParser = new JSONParser();
+		
+		try {
+		uNutritionix = new URL("https://api.nutritionix.com/v1_1/item?upc="+input+"&appId="+appID+"&appKey="+appKey).openConnection();
 
-    }
+		// Parse input data stream
+		InputStream	inputStream = uNutritionix.getInputStream();
+		JSONObject jsonObject = (JSONObject)jsonParser.parse(new InputStreamReader(inputStream, "UTF-8"));
+		
+		//convert JSON Object to JSON String
+		String sJsonObject=jsonObject.toJSONString();
+		
 
-
-    /**
-     * Sets the Map of nutritional values received from the Nutritionix API
-     *
-     * @param input UPC barcode value received from a scanning application
-     * @throws IOException Thrown exception from Inputstream
-     * @throws ParseException Thrown exception from parsing the Inputstream
-     */
-    private void setMap(String input) throws IOException, ParseException {
-
-        ObjectMapper map= new ObjectMapper();
-        JSONParser jsonParser = new JSONParser();
-
-        try {
-            uNutritionix = new URL("https://api.nutritionix.com/v1_1/item?upc="+input+"&appId="+appID+"&appKey="+appKey).openConnection();
-
-            // Parse input data stream
-            InputStream	inputStream = uNutritionix.getInputStream();
-            JSONObject jsonObject = (JSONObject)jsonParser.parse(new InputStreamReader(inputStream, "UTF-8"));
-
-            //convert JSON Object to JSON String
-            String sJsonObject=jsonObject.toJSONString();
-
-
-            //convert JSON string to Map
-            values = map.readValue(sJsonObject, new TypeReference<HashMap<String, String>>() {});
-
-        }
-
-        // catch IOException errors
-        catch (IOException	e)	{
-            e.printStackTrace();
-        }
-
-    }
-
-
-    /**
-     * Used to nutritional retrieve values stored within a Map
-     * @return Return Map of nutritional values
-     */
-    public Map<String, Object> getMap() {
-
-        return values;
-    }
-
-
-    /**
-     * Returns string value of data returned from the API
-     */
-    public String toString() {
-        return values.toString();
-
-    }
-
-
+        //convert JSON string to Map
+        values = map.readValue(sJsonObject, new TypeReference<HashMap<String, String>>() {});
+        
+		}	
+		
+		// catch IOException errors
+		catch (IOException	e)	{
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	/**
+	 * Used to nutritional retrieve values stored within a Map
+	 * @return Return Map of nutritional values
+	 */
+	public Map<String, Object> getMap() {
+		
+		return values;
+	}
+	
+	
+	/**
+	 * Returns string value of data returned from the API
+	 */
+	public String toString() {
+		return values.toString();
+	
+	}
+	
+	
 }
