@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
-    private Button scanBtn;
+    private Button scanBtn, enterBtn;
     private TextView formatTxt, contentTxt;
 
     @Override
@@ -24,11 +24,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //build scanner button
         scanBtn = (Button)findViewById(R.id.scan_button);
+        enterBtn = (Button)findViewById(R.id.enter_button);
         formatTxt = (TextView)findViewById(R.id.scan_format);
         contentTxt = (TextView)findViewById(R.id.scan_content);
 
         scanBtn.setOnClickListener(this);
+        enterBtn.setOnClickListener(this);
 
     }
 
@@ -39,6 +42,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             IntentIntegrator scanIntegrator = new IntentIntegrator(this);
             scanIntegrator.initiateScan();
         }
+        else{
+
+            Intent intent = new Intent(this, ResultsActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -46,18 +54,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 
         if (scanningResult != null) {
-//we have a result
+            //Valid barcode scanned
             String scanContent = scanningResult.getContents();
             String scanFormat = scanningResult.getFormatName();
 
             EditText editText = (EditText)findViewById(R.id.upcNumber);
             editText.setText(scanContent,TextView.BufferType.EDITABLE);
 
-        }
-        else{
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "No scan data received!", Toast.LENGTH_SHORT);
-            toast.show();
         }
 
     }
