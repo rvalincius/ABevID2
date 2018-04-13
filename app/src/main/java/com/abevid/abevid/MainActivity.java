@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //scan
             IntentIntegrator scanIntegrator = new IntentIntegrator(this);
             scanIntegrator.initiateScan();
+
         } else {
             EditText scanText = (EditText) findViewById(R.id.upcNumber);
             scanContent = scanText.getText().toString();
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (scanningResult != null) {
             //Valid barcode scanned
-
+            String scanContent = scanningResult.getContents();
             String scanFormat = scanningResult.getFormatName();
 
             EditText editText = (EditText) findViewById(R.id.upcNumber);
