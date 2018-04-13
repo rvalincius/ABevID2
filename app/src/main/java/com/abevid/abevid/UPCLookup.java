@@ -5,6 +5,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import android.app.IntentService;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 import org.json.simple.JSONObject;
@@ -13,6 +18,8 @@ import org.json.simple.parser.ParseException;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import static com.abevid.abevid.MainActivity.scanContent;
 
 /**
  * Retrieves nutritional information from Nutritionix based on scanned UPC label
@@ -25,12 +32,7 @@ public class UPCLookup {
 	private URLConnection uNutritionix = null;
 	private String appID,appKey;
 	protected Map<String, Object> values = new HashMap<String,Object>();
-	
-	// Default constructor
-	public UPCLookup() {
-		
-	}
-	
+	protected static JSONObject jsonFile;
 	
 	/**
 	 * Constructor to call API method and pass in the required UPC barcode
@@ -39,11 +41,13 @@ public class UPCLookup {
 	 * @throws IOException IO Exception error
 	 * @throws ParseException Data read exception error
 	 */
-	public UPCLookup(String iUPC) throws IOException, ParseException {
+	public UPCLookup(String iUPC) {
 		appID="247a5a79";
 		appKey="89e7a52a56731cf95b5a0fab0d31b89a";
-        setMap(iUPC);
-		
+
+			AsyncTaskRunner apiCall = new AsyncTaskRunner();
+			apiCall.execute();
+
 	}
 	
 	
@@ -65,21 +69,23 @@ public class UPCLookup {
 		// Parse input data stream
 		InputStream	inputStream = uNutritionix.getInputStream();
 		JSONObject jsonObject = (JSONObject)jsonParser.parse(new InputStreamReader(inputStream, "UTF-8"));
-		
+
+		// create static JSON
+			jsonFile=jsonObject;
+			Log.d("*****JSONOBJECT*******",jsonFile.toJSONString());
 		//convert JSON Object to JSON String
 		String sJsonObject=jsonObject.toJSONString();
 		
 
         //convert JSON string to Map
         values = map.readValue(sJsonObject, new TypeReference<HashMap<String, String>>() {});
-        
-		}	
-		
+		}
+
 		// catch IOException errors
 		catch (IOException	e)	{
 			e.printStackTrace();
 		}
-		
+
 	}
 	
 	
@@ -100,6 +106,48 @@ public class UPCLookup {
 		return values.toString();
 	
 	}
-	
-	
+	/*
+	 * code below obtained from a combination of
+	 * https://www.journaldev.com/9708/android-asynctask-example-tutorial
+	 * and https://stackoverflow.com/questions/14250989/how-to-use-asynctask-correctly-in-android
+	 */
+	private class AsyncTaskRunner extends AsyncTask<Void, String, String> {
+
+		private String resp;
+		ProgressDialog progressDialog;
+
+		@Override
+		protected String doInBackground(Void... params) {
+
+			try {
+				setMap(scanContent);
+			}
+			catch(ParseException e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// execution of result of Long time consuming operation
+			//progressDialog.dismiss();
+			//apiResult.setText(result);
+		}
+
+
+		@Override
+		protected void onPreExecute() {
+			//progressDialog = ProgressDialog.show(MainActivity.class,
+			//		"ProgressDialog",
+			//		"Retrieving data");
+		}
+
+
+		@Override
+		protected void onProgressUpdate(String... text) {
+			//apiResult.setText(text[0]);
+
+		}
+	}
 }
