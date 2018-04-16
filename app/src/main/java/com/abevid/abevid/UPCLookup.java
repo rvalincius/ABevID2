@@ -3,14 +3,18 @@ package com.abevid.abevid;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 import android.app.IntentService;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.os.Message;
+import android.util.JsonReader;
 import android.util.Log;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -75,7 +79,6 @@ public class UPCLookup {
 			Log.d("*****JSONOBJECT*******",jsonFile.toJSONString());
 		//convert JSON Object to JSON String
 		String sJsonObject=jsonObject.toJSONString();
-		
 
         //convert JSON string to Map
         values = map.readValue(sJsonObject, new TypeReference<HashMap<String, String>>() {});
@@ -87,8 +90,7 @@ public class UPCLookup {
 		}
 
 	}
-	
-	
+
 	/**
 	 * Used to nutritional retrieve values stored within a Map
 	 * @return Return Map of nutritional values
