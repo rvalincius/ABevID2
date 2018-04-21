@@ -63,6 +63,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        //retrieve scan result
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+
+        if (scanningResult != null) {
+            //Valid barcode scanned
+            String scanContent = scanningResult.getContents();
+            String scanFormat = scanningResult.getFormatName();
+
+            EditText editText = (EditText) findViewById(R.id.upcNumber);
+            editText.setText(scanContent, TextView.BufferType.EDITABLE);
+
+        }
+    }
+
     public void onCheckboxClicked(View view){
         ArrayList al = new ArrayList();
         boolean checked = ((CheckBox) view).isChecked();
