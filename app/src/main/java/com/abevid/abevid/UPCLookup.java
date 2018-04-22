@@ -5,22 +5,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import android.app.IntentService;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
-
-import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -34,22 +25,16 @@ import static com.abevid.abevid.MainActivity.scanContent;
  */
 public class UPCLookup {
 
-    private URLConnection uNutritionix = null;
     private String appID,appKey;
-    protected static HashMap<String, String> values = new HashMap<String, String>();
-    protected static JSONObject jsonObject;
+    protected static HashMap<String, String> values = new HashMap<>();
 
     /**
      * Constructor to call API method and pass in the required UPC barcode
      *
-     * @throws IOException IO Exception error
-     * @throws ParseException Data read exception error
      */
     public UPCLookup() {
-
         // Throw line item to log for tracking
         Log.d("UPCLOOKUP","Main constructor");
-
     }
 
 
@@ -65,14 +50,14 @@ public class UPCLookup {
         // Execute API
         Log.d("UPCLookup:","API Call starting");
         try {
-            uNutritionix = new URL("https://api.nutritionix.com/v1_1/item?upc="+input+"&appId="+appID+"&appKey="+appKey).openConnection();
+            URLConnection uNutritionix = new URL("https://api.nutritionix.com/v1_1/item?upc="+input+"&appId="+appID+"&appKey="+appKey).openConnection();
 
             // Parse input data stream
             JSONParser jsonParser = new JSONParser();
             InputStream	inputStream = uNutritionix.getInputStream();
 
             // create static JSON
-            jsonObject = (JSONObject)jsonParser.parse(new InputStreamReader(inputStream, "UTF-8"));
+            JSONObject jsonObject = (JSONObject)jsonParser.parse(new InputStreamReader(inputStream, "UTF-8"));
 
             //convert JSON Object to JSON String
             sJsonObject=jsonObject.toJSONString();
@@ -96,10 +81,10 @@ public class UPCLookup {
 
 
     /**
-     * Used to nutritional retrieve values stored within a Map
-     * @return Return Map of nutritional values
+     * Instantiates the background task and calls the API for the application
+     *
     */
-    public HashMap<String, String> getMap() throws InterruptedException, ExecutionException{
+    public void getMap() throws InterruptedException, ExecutionException{
         appID="247a5a79";
         appKey="89e7a52a56731cf95b5a0fab0d31b89a";
 
@@ -109,7 +94,6 @@ public class UPCLookup {
         //Start API background processing
         AsyncTaskRunner apiCall = new AsyncTaskRunner();
         apiCall.execute().get();
-        return values;
     }
 
 
@@ -118,8 +102,9 @@ public class UPCLookup {
      */
     public String toString() {
         return values.toString();
-
     }
+
+
     /*
      * code below obtained from a combination of
      * https://www.journaldev.com/9708/android-asynctask-example-tutorial
@@ -127,8 +112,8 @@ public class UPCLookup {
      */
     private class AsyncTaskRunner extends AsyncTask<Void, String, String> {
 
-        private String resp;
-        ProgressDialog progressDialog;
+        //private String resp;
+        //ProgressDialog progressDialog;
 
         @Override
         protected String doInBackground(Void... params) {
@@ -145,23 +130,38 @@ public class UPCLookup {
 
         @Override
         protected void onPostExecute(String result) {
+            /*
+             *   Currently not used.  Possible enhancement
+             */
             // execution of result of Long time consuming operation
             //progressDialog.dismiss();
             //apiResult.setText(result);
         }
 
+
+        /*
+        *   Used to establish any needed dialog information before running the
+        *   TaskRunner process
+         */
         @Override
         protected void onPreExecute() {
+            /*
+            *   Currently not used.  Possible enhancement
+             */
             //progressDialog = ProgressDialog.show(ResultsActivity.class,
             //		"ProgressDialog",
             //		"Retrieving data");
         }
 
 
-
+        /*
+        * Used to provide a status update for the TaskRunner process
+         */
         protected void onProgressUpdate(Integer... count) {
+            /*
+            *   Currently not used.  Possible enhancement
+             */
             //apiResult.setText(count[0]);
-
         }
     }
 }

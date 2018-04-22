@@ -5,16 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-import java.util.Map;
 
-/**
- * ItemAdapter Code downloaded from https://stackoverflow.com/questions/19466757/hashmap-to-listview
+/*
+ * ItemAdapter logic downloaded from tutorial at
+ * https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
  */
 
+/**
+ * Adapter class used to extend ArrayAdapter.  Used to build the ListView display
+ */
 public class ItemAdapter extends ArrayAdapter<Items> {
     public ItemAdapter(Context context, ArrayList<Items> items) {
         super(context, 0, items);
