@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -36,7 +37,7 @@ public class UPCLookup {
     private URLConnection uNutritionix = null;
     private String appID,appKey;
     protected static HashMap<String, String> values = new HashMap<String, String>();
-    protected static JSONObject jsonFile;
+    protected static JSONObject jsonObject;
 
     /**
      * Constructor to call API method and pass in the required UPC barcode
@@ -56,14 +57,10 @@ public class UPCLookup {
      * Sets the Map of nutritional values received from the Nutritionix API
      *
      * @param input UPC barcode value received from a scanning application
-     * @throws IOException Thrown exception from Inputstream
      * @throws ParseException Thrown exception from parsing the Inputstream
      */
     private void setMap(String input) throws ParseException {
         String sJsonObject;
-
-
-        JSONParser jsonParser = new JSONParser();
 
         // Execute API
         Log.d("UPCLookup:","API Call starting");
@@ -71,19 +68,22 @@ public class UPCLookup {
             uNutritionix = new URL("https://api.nutritionix.com/v1_1/item?upc="+input+"&appId="+appID+"&appKey="+appKey).openConnection();
 
             // Parse input data stream
+            JSONParser jsonParser = new JSONParser();
             InputStream	inputStream = uNutritionix.getInputStream();
-            JSONObject jsonObject = (JSONObject)jsonParser.parse(new InputStreamReader(inputStream, "UTF-8"));
 
             // create static JSON
-            jsonFile=jsonObject;
+            jsonObject = (JSONObject)jsonParser.parse(new InputStreamReader(inputStream, "UTF-8"));
+
             //convert JSON Object to JSON String
             sJsonObject=jsonObject.toJSONString();
+            Log.d("JSON String:",sJsonObject);
 
             //convert JSON string to Map
             ObjectMapper map= new ObjectMapper();
             values = map.readValue(sJsonObject, new TypeReference<HashMap<String, String>>() {});
 
             Log.d("UPCLookup.setMap():",values.toString());
+
         }
 
         // catch IOException errors
