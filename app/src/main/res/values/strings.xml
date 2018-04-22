@@ -4,4 +4,15 @@
     <string name="abevid_logo">ABevID Logo</string>
     <string name="enter">Enter</string>
     <string name="scan">Scan</string>
+    <string name="servings">Serving Size</string>
+    <string name="fats">Fat Contents</string>
+    <string name="vitA">DV% of Vitamin A</string>
+    <string name="vitC">DV% of Vitamin C</string>
+    <string name="cholest">Cholesterol</string>
+    <string name="calcium">DV% of Calcium</string>
+    <string name="sodium">DV% of Sodium</string>
+    <string name="iron">DV% of Iron</string>
+    <string name="carbs">Carbohydrates</string>
+    <string name="fiber">DV% of Fiber</string>
+    <string name="protein">DV% of Protein</string>
 </resources>

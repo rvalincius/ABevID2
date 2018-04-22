@@ -1,8 +1,6 @@
 package com.abevid.abevid;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,17 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button scanBtn, enterBtn;
-    private TextView formatTxt, contentTxt, apiResult;
+    public static CheckBox cServings,cVitA,cVitC,cFats,cCholest,cCalcium,cSodium,cIron,cCarbs,cFiber,cProtein;
+    private TextView formatTxt, contentTxt;
     protected static String scanContent;
 
     @Override
@@ -28,15 +24,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //build scanner button
-        scanBtn = (Button) findViewById(R.id.scan_button);
-        enterBtn = (Button) findViewById(R.id.enter_button);
-        formatTxt = (TextView) findViewById(R.id.scan_format);
-        contentTxt = (TextView) findViewById(R.id.scan_content);
+        //build buttons
+        scanBtn = findViewById(R.id.scan_button);
+        enterBtn = findViewById(R.id.enter_button);
+
+        //build checkboxes
+        formatTxt = findViewById(R.id.scan_format);
+        contentTxt = findViewById(R.id.scan_content);
+        cServings=findViewById(R.id.servings);
+        cVitA=findViewById(R.id.vitA);
+        cFats=findViewById(R.id.fats);
+        cVitC=findViewById(R.id.vitC);
+        cCholest=findViewById(R.id.cholest);
+        cCalcium=findViewById(R.id.calcium);
+        cSodium=findViewById(R.id.sodium);
+        cIron=findViewById(R.id.iron);
+        cCarbs=findViewById(R.id.carbs);
+        cFiber=findViewById(R.id.fiber);
+        cProtein=findViewById(R.id.protein);
 
         scanBtn.setOnClickListener(this);
         enterBtn.setOnClickListener(this);
-
 
     }
 
@@ -49,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else {
 
-                EditText scanText = (EditText) findViewById(R.id.upcNumber);
+                EditText scanText = findViewById(R.id.upcNumber);
                 scanContent = scanText.getText().toString();
                 Log.d("MainActivity.onClick ", "Barcode:"+scanContent);
             if(scanContent!= null) {
@@ -72,27 +80,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String scanContent = scanningResult.getContents();
             String scanFormat = scanningResult.getFormatName();
 
-            EditText editText = (EditText) findViewById(R.id.upcNumber);
+            EditText editText = findViewById(R.id.upcNumber);
             editText.setText(scanContent, TextView.BufferType.EDITABLE);
-
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "No value returned by scan", Toast.LENGTH_SHORT).show();
         }
     }
-
-    public void onCheckboxClicked(View view){
-        ArrayList al = new ArrayList();
-        boolean checked = ((CheckBox) view).isChecked();
-        switch (view.getId()){
-            case R.id.calories:
-                if (checked)
-                    al.add("calories");
-                else
-                    break;
-            case R.id.serving:
-                if(checked)
-                    al.add("serving_size");
-                else
-                    break;
-        }
-    }
-
 }
