@@ -5,8 +5,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
+
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 import org.json.simple.JSONObject;
@@ -76,6 +80,7 @@ public class UPCLookup {
             Log.d("UPCLookup", "IOException Error");
             e.printStackTrace();
         }
+
 
     }
 

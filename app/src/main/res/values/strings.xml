@@ -15,4 +15,5 @@
     <string name="carbs">Carbohydrates</string>
     <string name="fiber">DV% of Fiber</string>
     <string name="protein">DV% of Protein</string>
+    <string name="gluten">Contains Gluten</string>
 </resources>

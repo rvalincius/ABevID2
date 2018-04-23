@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button scanBtn, enterBtn;
-    public static CheckBox cServings,cVitA,cVitC,cFats,cCholest,cCalcium,cSodium,cIron,cCarbs,cFiber,cProtein;
+    public static CheckBox cServings,cVitA,cVitC,cFats,cCholest,cCalcium,cSodium,cIron,cCarbs,cFiber,cProtein,cGluten;
     private TextView formatTxt, contentTxt;
     protected static String scanContent;
 
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cCarbs=findViewById(R.id.carbs);
         cFiber=findViewById(R.id.fiber);
         cProtein=findViewById(R.id.protein);
+        cGluten=findViewById(R.id.gluten);
 
         scanBtn.setOnClickListener(this);
         enterBtn.setOnClickListener(this);
