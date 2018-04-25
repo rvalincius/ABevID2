@@ -15,21 +15,6 @@ public class ResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        // Execute API lookup
-        try {
-            Log.d("ResultsActivity: ", "Calling UPCLookup.getMap()");
-            UPCLookup input = new UPCLookup();
-            input.getMap();
-        }
-
-        // Error handling
-        catch(ExecutionException e){
-            e.printStackTrace();
-        }
-        catch(InterruptedException e){
-            e.printStackTrace();
-        }
-
         // Build the Array for the ListView and display it
         showData();
     }
@@ -120,6 +105,7 @@ public class ResultsActivity extends AppCompatActivity {
          // Attach the itemAdapter to a ListView
          ListView listView = findViewById(R.id.listview);
          listView.setAdapter(itemAdapter);
+         UPCLookup.values.clear();
     }
 
 }

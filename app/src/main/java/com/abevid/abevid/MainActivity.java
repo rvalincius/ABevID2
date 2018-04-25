@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.concurrent.ExecutionException;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button scanBtn, enterBtn;
     public static CheckBox cServings,cVitA,cVitC,cFats,cCholest,cCalcium,cSodium,cIron,cCarbs,cFiber,cProtein;
@@ -49,22 +51,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onClick(View v) {
+        
         //respond to clicks
+        //  Click for Scan Button
         if (v.getId() == R.id.scan_button) {
             //scan
             IntentIntegrator scanIntegrator = new IntentIntegrator(this);
             scanIntegrator.initiateScan();
         }
+        //  Click for Enter Button
         else {
 
                 EditText scanText = findViewById(R.id.upcNumber);
                 scanContent = scanText.getText().toString();
                 Log.d("MainActivity.onClick ", "Barcode:"+scanContent);
-            if(scanContent!= null) {
+
+            // New location to Execute API lookup to prevent null reporting
+            try {
+                Log.d("ResultsActivity: ", "Calling UPCLookup.getMap()");
+                UPCLookup input = new UPCLookup();
+                input.getMap();
+            }
+
+            // Error handling
+            catch(ExecutionException e){
+                e.printStackTrace();
+            }
+            catch(InterruptedException e){
+                e.printStackTrace();
+            }
+
+            if(scanContent!= null && UPCLookup.values.size() > 0) {
+
                 Intent intent = new Intent(this, ResultsActivity.class);
                 startActivity(intent);
-            }else{
-                Toast.makeText(getApplicationContext(), "No value returned by scan", Toast.LENGTH_SHORT).show();
+
+            }else {
+                if(scanContent!= null){
+                    Toast.makeText(getApplicationContext(), "No value returned by scan", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),"No data found for item",Toast.LENGTH_LONG).show();
+                }
 
             }
         }
