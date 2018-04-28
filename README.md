@@ -9,3 +9,4 @@ The scanned barcodes are parsed against the Nutritionix database to extraction o
 
 ## Screen Shots
 ![inputcapture](https://user-images.githubusercontent.com/35816394/39389605-272cfea8-4a58-11e8-9375-7b2e2fdeb2d5.PNG)
+![resultscapture](https://user-images.githubusercontent.com/35816394/39389627-5151c646-4a58-11e8-9438-231ae9c816ef.PNG)
