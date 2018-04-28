@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -81,9 +82,7 @@ public class UPCLookup {
             e.printStackTrace();
         }
 
-
     }
-
 
     /**
      * Instantiates the background task and calls the API for the application
@@ -108,7 +107,6 @@ public class UPCLookup {
     public String toString() {
         return values.toString();
     }
-
 
     /*
      * code below obtained from a combination of

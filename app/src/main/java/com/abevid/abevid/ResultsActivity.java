@@ -97,6 +97,10 @@ public class ResultsActivity extends AppCompatActivity {
             Items iIron= new Items("DV% iron",UPCLookup.values.get("nf_iron_dv"));
             arrayOfItems.add(iIron);
         }
+        if(MainActivity.cGluten.isChecked()) {
+            Items iGluten= new Items("Contains Gluten",UPCLookup.values.get("allergen_contains_gluten"));
+            arrayOfItems.add(iGluten);
+        }
 
 
          // Create the itemAdapter to convert the array to views
