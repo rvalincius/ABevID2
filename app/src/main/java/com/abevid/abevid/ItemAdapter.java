@@ -48,8 +48,8 @@ public class ItemAdapter extends ArrayAdapter<Items> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_layout, parent, false);
         }
         // Lookup view for data population
-        TextView tCategory = (TextView) convertView.findViewById(R.id.category);
-        TextView tContent = (TextView) convertView.findViewById(R.id.content);
+        TextView tCategory = convertView.findViewById(R.id.category);
+        TextView tContent = convertView.findViewById(R.id.content);
         // Populate the data into the template view using the data object
         tCategory.setText(item.iIdentifier);
         tContent.setText(item.iContent);

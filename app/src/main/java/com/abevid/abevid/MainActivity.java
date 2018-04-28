@@ -27,18 +27,19 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button scanBtn, enterBtn;
     public static CheckBox cServings,cVitA,cVitC,cFats,cCholest,cCalcium,cSodium,cIron,cCarbs,cFiber,cProtein,cGluten;
-    private TextView formatTxt, contentTxt;
+    //private TextView formatTxt, contentTxt;
     protected static String scanContent;
     private ProgressBar progressBar;
     private int progressStatus = 0;
     private Handler handler = new Handler();
 
-    @Override
     /**
      * The method executed when the current activity is created in memory
      *
      */
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TextView formatTxt,contentTxt;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
         //retrieve scan result
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 
