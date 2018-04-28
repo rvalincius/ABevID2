@@ -20,6 +20,9 @@ import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Public class for the main Android activity.  This class controls the Main UI for the application.
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button scanBtn, enterBtn;
     public static CheckBox cServings,cVitA,cVitC,cFats,cCholest,cCalcium,cSodium,cIron,cCarbs,cFiber,cProtein,cGluten;

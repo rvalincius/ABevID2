@@ -7,8 +7,15 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Class used to populate the Results Activity page of the application
+ */
 public class ResultsActivity extends AppCompatActivity {
 
+    /**
+     * Method used to create the ResultsActivity in memory
+     * @param savedInstanceState The saved state of the instance of ResultsActivity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -19,6 +26,9 @@ public class ResultsActivity extends AppCompatActivity {
         showData();
     }
 
+    /**
+     * Method used to construct the data for the display
+     */
     private void showData() {
 
         /*
@@ -109,6 +119,8 @@ public class ResultsActivity extends AppCompatActivity {
          // Attach the itemAdapter to a ListView
          ListView listView = findViewById(R.id.listview);
          listView.setAdapter(itemAdapter);
+
+         // Clear map values to prevent null data errors
          UPCLookup.values.clear();
     }
 
