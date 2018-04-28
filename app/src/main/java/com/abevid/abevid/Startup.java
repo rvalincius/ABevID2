@@ -5,6 +5,9 @@ import android.os.SystemClock;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Class used to delay startup in order to display loading splash screen
+ */
 public class Startup extends Application {
 
     @Override

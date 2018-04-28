@@ -5,13 +5,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-
-import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
-
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 import org.json.simple.JSONObject;
@@ -84,8 +79,9 @@ public class UPCLookup {
 
     }
 
+
     /**
-     * Instantiates the background task and calls the API for the application
+     * Instantiates the background task and calls the AsyncTask for executing the API for the application
      *
     */
     public void getMap() throws InterruptedException, ExecutionException{
@@ -108,6 +104,10 @@ public class UPCLookup {
         return values.toString();
     }
 
+    /**
+     * Class used to initialize and execute a background process.  This background process is needed
+     * in order to successfully execute the API call.
+     */
     /*
      * code below obtained from a combination of
      * https://www.journaldev.com/9708/android-asynctask-example-tutorial
@@ -118,6 +118,11 @@ public class UPCLookup {
         //private String resp;
         //ProgressDialog progressDialog;
 
+        /**
+         * Used to execute processes in the background via a new thread
+         * @param params Needed parameters for processing within the Background Task
+         * @return a null string value.
+         */
         @Override
         protected String doInBackground(Void... params) {
             Log.d("doInBackground","Starting AsyncTaskRunner");
@@ -131,6 +136,10 @@ public class UPCLookup {
             return null;
         }
 
+        /**
+         * Used to process needed transactions after TaskRunner processes complete
+         * @param result String passed into method for Post TaskRunner execution
+         */
         @Override
         protected void onPostExecute(String result) {
             /*
@@ -142,7 +151,7 @@ public class UPCLookup {
         }
 
 
-        /*
+        /**
         *   Used to establish any needed dialog information before running the
         *   TaskRunner process
          */
@@ -157,7 +166,7 @@ public class UPCLookup {
         }
 
 
-        /*
+        /**
         * Used to provide a status update for the TaskRunner process
          */
         protected void onProgressUpdate(Integer... count) {

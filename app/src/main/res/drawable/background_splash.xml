@@ -6,8 +6,13 @@
 
     <item>
         <bitmap
-            android:gravity="center"
-            android:src="@mipmap/splashscreen"/>
+        android:gravity="center"
+        android:src="@mipmap/splashscreen"/>
+    </item>
+    <item>
+        <bitmap
+            android:gravity="bottom"
+            android:src="@mipmap/poweredby_nutritionix_api"/>
     </item>
 
 </layer-list>

@@ -1,6 +1,10 @@
 package com.abevid.abevid;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +14,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +25,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static CheckBox cServings,cVitA,cVitC,cFats,cCholest,cCalcium,cSodium,cIron,cCarbs,cFiber,cProtein,cGluten;
     private TextView formatTxt, contentTxt;
     protected static String scanContent;
+    private ProgressBar progressBar;
+    private int progressStatus = 0;
+    private Handler handler = new Handler();
 
     @Override
+    /**
+     * The method executed when the current activity is created in memory
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -51,6 +62,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Method to execute that button click for buttons within the application.
+     * @param v The view that has been clicked
+     */
     public void onClick(View v) {
         
         //respond to clicks
@@ -84,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if(scanContent!= null && UPCLookup.values.size() > 0) {
 
-                Intent intent = new Intent(this, ResultsActivity.class);
+                Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
                 startActivity(intent);
 
             }else {
