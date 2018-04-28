@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Class used to delay startup in order to display loading splash screen
+ * @author John Moser
  */
 public class Startup extends Application {
 

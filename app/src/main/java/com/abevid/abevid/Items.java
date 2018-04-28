@@ -2,6 +2,7 @@ package com.abevid.abevid;
 
 /**
  * Used to establish the structure of any new items created
+ * @author John Moser
  */
 public class Items {
     public String iIdentifier;

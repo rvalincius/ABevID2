@@ -22,6 +22,7 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * Public class for the main Android activity.  This class controls the Main UI for the application.
+ * @author Rob Valincius / John Moser
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button scanBtn, enterBtn;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     /**
      * The method executed when the current activity is created in memory
+     *
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

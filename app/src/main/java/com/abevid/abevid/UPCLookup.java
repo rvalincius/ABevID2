@@ -18,8 +18,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import static com.abevid.abevid.MainActivity.scanContent;
 
 /**
- * Retrieves nutritional information from Nutritionix based on scanned UPC label
- * CIS111B-ONLN Final project ABevID
+ * The class performs an API call via a background process to the Nutritionix database.
+ * A UPC label is passed to the API and a JSON Object is returned.
+ *
+ * <ul>** More information is available about the API at <a href=https://developer.nutritionix.com/docs/v1_1 target="_blank">Nutritionix.com</a></ul>
  * @author John Moser
  *
  */
@@ -82,7 +84,8 @@ public class UPCLookup {
 
     /**
      * Instantiates the background task and calls the AsyncTask for executing the API for the application
-     *
+     * @throws InterruptedException if connection is interrupted
+     * @throws ExecutionException if the execution of the API returns an exception
     */
     public void getMap() throws InterruptedException, ExecutionException{
         appID="247a5a79";

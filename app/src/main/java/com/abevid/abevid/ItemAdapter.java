@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 /**
  * Adapter class used to extend ArrayAdapter.  Used to build the ListView display in the Results Activity
+ * @author John Moser
+ * @see ArrayAdapter
  */
 public class ItemAdapter extends ArrayAdapter<Items> {
 
@@ -22,6 +24,8 @@ public class ItemAdapter extends ArrayAdapter<Items> {
      * Default constructor for the class
      * @param context The current context
      * @param items The resource used to instantiate the view by the adapter
+     * @see Items
+     * @see ArrayList
      */
     public ItemAdapter(Context context, ArrayList<Items> items) {
         super(context, 0, items);
@@ -33,6 +37,7 @@ public class ItemAdapter extends ArrayAdapter<Items> {
      * @param convertView The old view used
      * @param parent Where the view being returned will be attached
      * @return The converted view
+     * @see ViewGroup
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

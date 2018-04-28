@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * Class used to populate the Results Activity page of the application
+ * @author Rob Valincius / John Moser
  */
 public class ResultsActivity extends AppCompatActivity {
 
