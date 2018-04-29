@@ -3,6 +3,7 @@
     <string name="please_scan_enter_alcohol_upc">Please scan/enter alcohol UPC</string>
     <string name="abevid_logo">ABevID Logo</string>
     <string name="nutritionixAPI">API Logo</string>
+    <string name="gF">Gluten Free</string>
     <string name="enter">Enter</string>
     <string name="scan">Scan</string>
     <string name="servings">Serving Size</string>

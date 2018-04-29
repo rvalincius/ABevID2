@@ -27,7 +27,6 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button scanBtn, enterBtn;
     public static CheckBox cServings,cVitA,cVitC,cFats,cCholest,cCalcium,cSodium,cIron,cCarbs,cFiber,cProtein,cGluten;
-    //private TextView formatTxt, contentTxt;
     protected static String scanContent;
     private ProgressBar progressBar;
     private int progressStatus = 0;
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * The method executed when the current activity is created in memory
-     *
+     * @serial cVitA Checked status for filtering of Vitamin A data
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

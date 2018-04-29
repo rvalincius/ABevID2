@@ -3,6 +3,8 @@ package com.abevid.abevid;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -113,6 +115,16 @@ public class ResultsActivity extends AppCompatActivity {
             arrayOfItems.add(iGluten);
         }
 
+        /*
+        * Check for allergen information and display GF logo if item is Gluten Free
+         */
+        // Commenting out the below code due to invalid data in the Nutritionix database.
+        // We are leaving code in place in the event that data starts to be populated in
+        // the database correctly.
+        /*if(UPCLookup.values.get("allergen_contains_gluten")==null){
+            ImageView imV = findViewById(R.id.gF);
+            imV .setVisibility(View.VISIBLE);
+        }*/
 
          // Create the itemAdapter to convert the array to views
          ItemAdapter itemAdapter = new ItemAdapter(this, arrayOfItems);

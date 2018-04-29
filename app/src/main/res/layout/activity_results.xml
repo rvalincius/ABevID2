@@ -11,5 +11,15 @@
         android:layout_height="wrap_content" >
     </ListView>
 
+    <ImageView
+        android:id="@+id/gF"
+        android:layout_width="52dp"
+        android:layout_height="47dp"
+        android:contentDescription="@string/gF"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/gf" />
+
 
 </android.support.constraint.ConstraintLayout>
