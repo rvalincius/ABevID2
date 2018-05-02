@@ -26,7 +26,54 @@ import java.util.concurrent.ExecutionException;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button scanBtn, enterBtn;
-    public static CheckBox cServings,cVitA,cVitC,cFats,cCholest,cCalcium,cSodium,cIron,cCarbs,cFiber,cProtein,cGluten;
+    /**
+     * Serving Size checkbox
+     */
+    public static CheckBox cServings;
+    /**
+     * Vitamin A checkbox
+     */
+    public static CheckBox cVitA;
+    /**
+     * Vitamin C checkbox
+     */
+    public static CheckBox cVitC;
+    /**
+     * Fats checkbox
+     */
+    public static CheckBox cFats;
+    /**
+     * Cholesterol checkbox
+     */
+    public static CheckBox cCholest;
+    /**
+     * Calcium checkbox
+     */
+    public static CheckBox cCalcium;
+    /**
+     * Sodium checkbox
+     */
+    public static CheckBox cSodium;
+    /**
+     * Iron checkbox
+     */
+    public static CheckBox cIron;
+    /**
+     * Carbohydrates checkbox
+     */
+    public static CheckBox cCarbs;
+    /**
+     * Fiber checkbox
+     */
+    public static CheckBox cFiber;
+    /**
+     * Protein checkbox
+     */
+    public static CheckBox cProtein;
+    /**
+     * Gluten checkbox
+     */
+    public static CheckBox cGluten;
     protected static String scanContent;
     private ProgressBar progressBar;
     private int progressStatus = 0;
@@ -46,9 +93,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         scanBtn = findViewById(R.id.scan_button);
         enterBtn = findViewById(R.id.enter_button);
 
-        //build checkboxes
+        //build textfield
         formatTxt = findViewById(R.id.scan_format);
         contentTxt = findViewById(R.id.scan_content);
+
+        //build checkboxes
         cServings=findViewById(R.id.servings);
         cVitA=findViewById(R.id.vitA);
         cFats=findViewById(R.id.fats);
@@ -76,7 +125,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //respond to clicks
         //  Click for Scan Button
         if (v.getId() == R.id.scan_button) {
-            //scan
+            /* ZXING integration
+            * https://github.com/zxing/zxing/wiki/Getting-Started-Developing
+             */
             IntentIntegrator scanIntegrator = new IntentIntegrator(this);
             scanIntegrator.initiateScan();
         }
@@ -102,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 e.printStackTrace();
             }
 
+            //  Look for null object returned from API
             if(scanContent!= null && UPCLookup.values.size() > 0) {
 
                 Intent intent = new Intent(MainActivity.this, ResultsActivity.class);

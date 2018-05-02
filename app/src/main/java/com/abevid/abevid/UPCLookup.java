@@ -140,21 +140,6 @@ public class UPCLookup {
         }
 
         /**
-         * Used to process needed transactions after TaskRunner processes complete
-         * @param result String passed into method for Post TaskRunner execution
-         */
-        @Override
-        protected void onPostExecute(String result) {
-            /*
-             *   Currently not used.  Possible enhancement
-             */
-            // execution of result of Long time consuming operation
-            //progressDialog.dismiss();
-            //apiResult.setText(result);
-        }
-
-
-        /**
         *   Used to establish any needed dialog information before running the
         *   TaskRunner process
          */
@@ -177,6 +162,20 @@ public class UPCLookup {
             *   Currently not used.  Possible enhancement
              */
             //apiResult.setText(count[0]);
+        }
+
+        /**
+         * Used to process needed transactions after TaskRunner processes complete
+         * @param result String passed into method for Post TaskRunner execution
+         */
+        @Override
+        protected void onPostExecute(String result) {
+            /*
+             *   Currently not used.  Possible enhancement
+             */
+            // execution of result of Long time consuming operation
+            //progressDialog.dismiss();
+            //apiResult.setText(result);
         }
     }
 }
